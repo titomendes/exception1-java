@@ -13,7 +13,7 @@ public class Program {
 		
 		Scanner sc = new Scanner(System.in);
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		
+
 		System.out.print("Room Number");
 		int number = sc.nextInt();
 		System.out.print("Check-in date: ");
@@ -34,22 +34,14 @@ public class Program {
 			System.out.print("Check-Out date: ");
 			checkOut = sdf.parse(sc.next());
 			
-			Date now = new Date();
-			if(checkIn.before(now) || checkOut.before(now)){
-				System.out.println("Error in reservation: Reservation dates for updates must be future dates");
-			}
-			else if (!checkOut.after(checkIn)){
-				System.out.println("Error in reservation");
+			String error = reservation.updateDate(checkIn, checkOut);
+			if (error != null) {
+				System.out.println("Error in reservation: "+ error);
 			}
 			else {
-				reservation.updateDate(checkIn, checkOut);
 				System.out.println("Reservation: "+ reservation);
 			}
-			
-			
-			
 		}
-		
 	
 	
 	
